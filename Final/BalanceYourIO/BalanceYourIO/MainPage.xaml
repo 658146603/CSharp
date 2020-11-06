@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
+            x:Class="BalanceYourIO.MainPage">
+    
+    <local:DataPage Title="数据" IconImageSource="drawable/ic_data" />
+
+    <local:GraphPage Title="图表" IconImageSource="drawable/ic_graph" />
+
+    <local:UserPage Title="我的" IconImageSource="drawable/ic_user" />
+
+</TabbedPage>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="UserPage.xaml.cs">
+        <DependentUpon>ConfigPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Xamarin.Android.Support.Compat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.android.support.compat\28.0.0.3\lib\monoandroid90\Xamarin.Android.Support.Compat.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+</Project>
