@@ -9,7 +9,9 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand" />
 
-            <ImageButton Source="drawable/ic_float_add" BackgroundColor="Transparent" Margin="16" HorizontalOptions="End" VerticalOptions="End"
+            <ImageButton Source="drawable/ic_float_add" 
+                         BackgroundColor="Transparent" Margin="16" 
+                         HorizontalOptions="End" VerticalOptions="End"
                          Clicked="NewBillRecord_OnClicked" />
         </StackLayout>
     </ContentPage.Content>

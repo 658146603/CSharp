@@ -25,7 +25,7 @@ namespace BalanceYourIO
             Year = 3
         }
 
-        public static ArrayList BillTypes = new ArrayList
+        public static readonly List<BillType> BillTypes = new List<BillType>
         {
             new BillType {Id = "b4b5fe2d-e48f-4a90-9ba3-5c4905158a22", Name = "餐饮", IoType = IoType.Outcome, Icon = "drawable/type_food.png"},
             new BillType {Id = "bb944e95-cdde-4af3-8073-affa1fcbce60", Name = "娱乐", IoType = IoType.Outcome, Icon = "drawable/type_game.png"},

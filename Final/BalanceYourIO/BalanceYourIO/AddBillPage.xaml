@@ -2,14 +2,57 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
              x:Class="BalanceYourIO.AddBillPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="选择类型"
-                   FontSize="Medium"
-                   Margin="8, 6"
-                   VerticalOptions="StartAndExpand"
-                   HorizontalOptions="Start" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DateStringConverter x:Key="DateStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="144" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="选择类型"
+               FontSize="Large"
+               Margin="8, 6"
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Start" />
+        <CollectionView Grid.Row="1" />
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0"
+                        x:Name="ChooseDate"
+                        ImageSource="drawable/ic_calendar"
+                        BackgroundColor="Transparent"
+                        Margin="1, 1" />
+
+                <Label Grid.Column="1"
+                       x:Name="DateLabel"
+                       FontSize="16"
+                       TextColor="Black"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Start"
+                       Margin="1, 1"
+                       MaxLines="1" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>

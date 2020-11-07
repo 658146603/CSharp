@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <CalendarView
+            android:id="@+id/choose_date_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+        <RadioButton android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:layout_height="wrap_content"
+                     android:text="@string/dawn"/>
+
+        <RadioButton android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:layout_height="wrap_content"
+                     android:text="@string/morning"/>
+
+        <RadioButton android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:text="@string/noon"
+                     android:layout_height="wrap_content"/>
+
+        <RadioButton android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:text="@string/afternoon"
+                     android:layout_height="wrap_content"/>
+
+        <RadioButton android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:text="@string/evening"
+                     android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+    <Button android:background="@drawable/border"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/submit"
+            android:layout_width="match_parent"
+            android:textSize="18dp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_height="48dp"/>
+
+</LinearLayout>

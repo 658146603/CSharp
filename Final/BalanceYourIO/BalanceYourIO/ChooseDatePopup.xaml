@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 x:Class="BalanceYourIO.ChooseDatePopup">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="400" DurationOut="300"
+            EasingIn="SinOut" EasingOut="SinIn"
+            HasBackgroundAnimation="True" PositionIn="Center"
+            PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="24" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DatePicker Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" x:Name="DatePicker"
+                    DateSelected="DatePicker_OnDateSelected" />
+
+        <RadioButton Grid.Column="0" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayDawn" Text="凌晨" />
+        <RadioButton Grid.Column="1" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayMorning" Text="上午" />
+        <RadioButton Grid.Column="2" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayNoon" Text="中午" />
+        <RadioButton Grid.Column="3" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayAfternoon" Text="下午" />
+        <RadioButton Grid.Column="4" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayEvening" Text="晚上" />
+
+        <ImageButton Grid.Column="0"
+                     Grid.Row="2"
+                     Grid.ColumnSpan="5"
+                     x:Name="Submit"
+                     Source="drawable/ic_float_check"
+                     BackgroundColor="Transparent"
+                     Clicked="Submit_OnClicked" />
+    </Grid>
+</pages:PopupPage>
