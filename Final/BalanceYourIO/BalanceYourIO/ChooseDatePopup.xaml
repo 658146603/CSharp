@@ -14,11 +14,14 @@
             PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
-    <Grid BackgroundColor="White">
+    <Grid BackgroundColor="White" Padding="4" Margin="16"
+          HorizontalOptions="Center" VerticalOptions="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="24" />
+            <RowDefinition Height="48" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="48" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -32,14 +35,19 @@
         <DatePicker Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" x:Name="DatePicker"
                     DateSelected="DatePicker_OnDateSelected" />
 
-        <RadioButton Grid.Column="0" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayDawn" Text="凌晨" />
-        <RadioButton Grid.Column="1" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayMorning" Text="上午" />
-        <RadioButton Grid.Column="2" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayNoon" Text="中午" />
-        <RadioButton Grid.Column="3" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayAfternoon" Text="下午" />
-        <RadioButton Grid.Column="4" Grid.Row="1" GroupName="DayDetail" TextColor="Black" x:Name="DayEvening" Text="晚上" />
+        <Button Grid.Column="0" Grid.Row="2" TextColor="Gray" x:Name="DayDawn" Text="凌晨" Clicked="DayDawn_Selected"
+                BackgroundColor="Transparent" />
+        <Button Grid.Column="1" Grid.Row="2" TextColor="Gray" x:Name="DayMorning" Text="上午"
+                Clicked="DayMorning_Selected" BackgroundColor="Transparent" />
+        <Button Grid.Column="2" Grid.Row="2" TextColor="Gray" x:Name="DayNoon" Text="中午" Clicked="DayNoon_Selected"
+                BackgroundColor="Transparent" />
+        <Button Grid.Column="3" Grid.Row="2" TextColor="Gray" x:Name="DayAfternoon" Text="下午"
+                Clicked="DayAfternoon_Selected" BackgroundColor="Transparent" />
+        <Button Grid.Column="4" Grid.Row="2" TextColor="Gray" x:Name="DayEvening" Text="晚上"
+                Clicked="DayEvening_Selected" BackgroundColor="Transparent" />
 
         <ImageButton Grid.Column="0"
-                     Grid.Row="2"
+                     Grid.Row="4"
                      Grid.ColumnSpan="5"
                      x:Name="Submit"
                      Source="drawable/ic_float_check"
