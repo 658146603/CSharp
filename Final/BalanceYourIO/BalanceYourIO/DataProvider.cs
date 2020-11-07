@@ -104,7 +104,7 @@ namespace BalanceYourIO
             new BillType
             {
                 Id = "cb50fae9-ff8a-4203-8e9f-9901044e3695", Name = "充值", IoType = IoType.Other,
-                Icon = "drawable/type_repayment.png"
+                Icon = "drawable/type_recharge.png"
             },
             new BillType
             {

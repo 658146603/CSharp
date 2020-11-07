@@ -4,31 +4,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
              x:Class="BalanceYourIO.AddBillPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:DateStringConverter x:Key="DateStringConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition Height="144" />
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Text="选择类型"
-               FontSize="Large"
-               Margin="8, 6"
-               VerticalOptions="StartAndExpand"
-               HorizontalOptions="Start" />
-        <CollectionView Grid.Row="1" />
-        <Grid Grid.Row="2">
+
+    <StackLayout Orientation="Vertical" Padding="16, 16, 16, 16">
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+                <Label Text="支出"
+                       FontSize="Large"
+                       HorizontalOptions="Center"
+                       Margin="0, 16, 0, 0" />
+                <Grid x:Name="BillTypesOutcomeGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="72" />
+                        <RowDefinition Height="72" />
+                    </Grid.RowDefinitions>
+                </Grid>
+
+                <Label Text="收入"
+                       FontSize="Large"
+                       HorizontalOptions="Center"
+                       Margin="0, 16, 0, 0" />
+                <Grid x:Name="BillTypesIncomeGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="72" />
+                    </Grid.RowDefinitions>
+                </Grid>
+
+                <Label Text="其他"
+                       FontSize="Large"
+                       HorizontalOptions="Center"
+                       Margin="0, 16, 0, 0" />
+                <Grid x:Name="BillTypesOtherGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="72" />
+                    </Grid.RowDefinitions>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+
+        <Grid VerticalOptions="End">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
@@ -54,5 +98,5 @@
                        MaxLines="1" />
             </Grid>
         </Grid>
-    </Grid>
+    </StackLayout>
 </ContentPage>
