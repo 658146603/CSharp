@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 
 namespace BalanceYourIO
 {
-    public class BillRecordDayGroup : List<BillRecord>
+    public class BillRecordDayGroup
     {
         public DateTime Date { get; set; }
 
@@ -14,37 +14,34 @@ namespace BalanceYourIO
 
         public double Outcome { get; set; }
 
-        private List<BillRecordDetail> Records { get; set; }
-
+        public List<BillRecordDetail> Details { get; set; }
+        
         public BillRecordDayGroup(List<BillRecord> billRecords)
         {
-            Records = billRecords.ConvertAll(delegate(BillRecord input)
+
+            Details = billRecords.ConvertAll(delegate(BillRecord input)
             {
                 BillRecordDetail billRecordDetail = new BillRecordDetail(input);
                 return billRecordDetail;
             });
-
-            if (Records.Count > 0)
+            
+            if (Details.Count > 0)
             {
-                Income = Records.Sum(detail => detail.Type.IoType == DataProvider.IoType.Income ? detail.Amount : 0);
-                Outcome = Records.Sum(detail => detail.Type.IoType == DataProvider.IoType.Outcome ? detail.Amount : 0);
+                Income = Details.Sum(detail => detail.Type.IoType == DataProvider.IoType.Income ? detail.Amount : 0);
+                Outcome = Details.Sum(detail => detail.Type.IoType == DataProvider.IoType.Outcome ? detail.Amount : 0);
             }
         }
 
-        public static ObservableCollection<BillRecordDayGroup> ConvertAll(List<BillRecord> billRecords)
+        public static List<BillRecordDayGroup> ConvertAll(List<BillRecord> billRecords)
         {
-            ObservableCollection<BillRecordDayGroup> collection = new ObservableCollection<BillRecordDayGroup>();
+            List<BillRecordDayGroup> collection = new List<BillRecordDayGroup>();
             billRecords.GroupToDictionary(record => record.Time.Date).ForEach(pair =>
             {
-                collection.Add(new BillRecordDayGroup(pair.Value) {Date = pair.Key});
+                var list = from record in pair.Value orderby record.Time.Hour descending select record;
+                collection.Add(new BillRecordDayGroup(list.ToList()) {Date = pair.Key});
             });
 
             return collection;
-        }
-
-        public static ObservableCollection<BillRecordDayGroup> All
-        {
-            get => ConvertAll(App.Database.GetBillRecordsAsync().Result);
         }
     }
 }

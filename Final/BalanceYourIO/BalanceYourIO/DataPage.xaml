@@ -6,34 +6,10 @@
              x:Class="BalanceYourIO.DataPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="RecordList">
-                <!-- <ListView.GroupHeaderTemplate> -->
-                <!--     <DataTemplate> -->
-                <!--         <Grid> -->
-                <!--             <Grid.ColumnDefinitions> -->
-                <!--                 <ColumnDefinition /> -->
-                <!--                 <ColumnDefinition /> -->
-                <!--                 <ColumnDefinition /> -->
-                <!--                 <ColumnDefinition /> -->
-                <!--             </Grid.ColumnDefinitions> -->
-                <!--             <Label x:Name="GroupDateLabel" Grid.Column="0" /> -->
-                <!--             <Label Grid.Column="1" /> -->
-                <!--             <Label x:Name="GroupOutcomeLabel" Grid.Column="2" TextColor="Orange" /> -->
-                <!--             <Label x:Name="GroupIncomeLabel" Grid.Column="3" TextColor="Green" /> -->
-                <!--         </Grid> -->
-                <!--     </DataTemplate> -->
-                <!-- </ListView.GroupHeaderTemplate> -->
+            <ListView x:Name="RecordList" IsGroupingEnabled="True">
+                <ListView.HeaderTemplate>
 
-                <!-- <ListView.ItemTemplate> -->
-                <!--     <DataTemplate> -->
-                <!--         <StackLayout Orientation="Vertical"> -->
-                <!--             <Image x:Name="ChildTypeIcon" /> -->
-                <!--             <Label x:Name="ChildTypeNameLabel" /> -->
-                <!--             <Label x:Name="ChildRemarkLabel" /> -->
-                <!--             <Label x:Name="ChildAmountLabel" /> -->
-                <!--         </StackLayout> -->
-                <!--     </DataTemplate> -->
-                <!-- </ListView.ItemTemplate> -->
+                </ListView.HeaderTemplate>
             </ListView>
 
             <ImageButton Source="drawable/ic_float_add"

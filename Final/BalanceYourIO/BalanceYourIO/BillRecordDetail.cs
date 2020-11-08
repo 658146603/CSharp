@@ -45,7 +45,7 @@ namespace BalanceYourIO
 
         public override string ToString()
         {
-            return $"{Id}, {DateConverter.ToFriendDateTimeString(Date)}, {Type}, {Amount}, {Remark}";
+            return $"{Id}, {DateConverter.ToFriendDateString(Date)}, {DateConverter.ToFriendDateTimeString(Time)}, {Type}, {Amount}, {Remark}";
         }
         
         internal class BillRecordConverter: IValueConverter

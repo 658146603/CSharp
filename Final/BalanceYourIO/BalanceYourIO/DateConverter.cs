@@ -53,6 +53,26 @@ namespace BalanceYourIO
             return final;
         }
 
+        public static string ToFriendDateString(DateTime dateTime)
+        {
+            var today = DateTime.Now;
+            var week = WeekName[dateTime.DayOfWeek];
+            var date = dateTime.ToString("MM月dd日");
+            var year = dateTime.Year != today.Year ? $"{dateTime.Year}年" : "";
+
+            string final;
+
+            if (dateTime.Year == today.Year && dateTime.DayOfYear == today.DayOfYear)
+            {
+                final = $"{year}{date}(今天) {week}";
+            }
+            else
+            {
+                final = $"{year}{date} {week}";
+            }
+
+            return final;
+        }
 
         private static string ToDayDetail(int hour)
         {
