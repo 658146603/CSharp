@@ -21,8 +21,8 @@ namespace BalanceYourIO
         public string Remark { get; set; }
         public Color Color { get; set; }
         
-        public string Icon { get; set; }
-
+        public bool RemarkVisible { get; set; }
+        
         public BillRecordDetail(BillRecord billRecord)
         {
             Id = billRecord.Id;
@@ -31,7 +31,9 @@ namespace BalanceYourIO
             Time = billRecord.Time;
             Amount = billRecord.Amount;
             Remark = billRecord.Remark;
-            
+
+            RemarkVisible = !string.IsNullOrEmpty(Remark);
+
             switch (Type.IoType)
             {
                 case IoType.Income:
@@ -48,7 +50,8 @@ namespace BalanceYourIO
 
         public override string ToString()
         {
-            return $"{Id}, {DateConverter.ToFriendDateString(Date)}, {DateConverter.ToFriendDateTimeString(Time)}, {Type}, {Amount}, {Remark}";
+            return
+                $"{Id}, {DateConverter.ToFriendDateString(Date)}, {DateConverter.ToFriendDateTimeString(Time)}, {Type}, {Amount}, {Remark}";
         }
     }
 }

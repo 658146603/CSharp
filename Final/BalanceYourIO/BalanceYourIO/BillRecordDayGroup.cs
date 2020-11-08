@@ -7,7 +7,7 @@ using Xamarin.Forms.Internals;
 
 namespace BalanceYourIO
 {
-    public class BillRecordDayGroup: ObservableCollection<BillRecordDetail>
+    public class BillRecordDayGroup : ObservableCollection<BillRecordDetail>
     {
         public string Date => DateConverter.ToFriendDateString(_date);
 
@@ -16,7 +16,7 @@ namespace BalanceYourIO
         public double Income { get; set; } = 0f;
 
         public double Outcome { get; set; } = 0f;
-        
+
         public BillRecordDayGroup(List<BillRecord> billRecords)
         {
             foreach (var record in billRecords)
@@ -36,15 +36,17 @@ namespace BalanceYourIO
 
         public static ObservableCollection<BillRecordDayGroup> ConvertAll(List<BillRecord> billRecords)
         {
-            ObservableCollection<BillRecordDayGroup> collection = new ObservableCollection<BillRecordDayGroup>();
+            List<BillRecordDayGroup> collection = new List<BillRecordDayGroup>();
             billRecords.GroupToDictionary(record => record.Time.Date).ForEach(pair =>
             {
-                var list = from record in pair.Value orderby record.Time.Hour descending select record;
+                var list = from record in pair.Value
+                    orderby record.Time.Hour descending, record.Id descending
+                    select record;
                 var group = new BillRecordDayGroup(list.ToList()) {_date = pair.Key};
                 collection.Add(group);
             });
 
-            return collection;
+            return new ObservableCollection<BillRecordDayGroup>(collection.OrderByDescending(group => @group.Date));
         }
     }
 }

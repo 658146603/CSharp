@@ -14,15 +14,19 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="72" />
-                                    <ColumnDefinition Width="72" />
+                                    <ColumnDefinition Width="96" />
+                                    <ColumnDefinition Width="96" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Large" />
+                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Large"
+                                       VerticalTextAlignment="Center" Margin="8, 0, 0, 0" />
                                 <Label Grid.Column="1" />
-                                <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange" FontSize="Large"
-                                       Text="{Binding Outcome}" />
-                                <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Large"
-                                       Text="{Binding Income}" />
+                                <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange" FontSize="Small"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Outcome, StringFormat='支出 {0:F2}'}" />
+                                <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Small"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="End"
+                                       Text="{Binding Income, StringFormat='收入 {0:F2}'}" Margin="0, 0, 8, 0" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -38,13 +42,20 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
-                                        <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" x:Name="ChildTypeIcon" Source="{Binding Type.Icon}" />
-                                    <Label Grid.Column="1" x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" />
-                                    <Label Grid.Column="2" x:Name="ChildRemarkLabel" Text="{Binding Remark}" />
-                                    <Label Grid.Column="4" x:Name="ChildAmountLabel" Text="{Binding Amount}"
-                                           TextColor="{Binding Color}" />
+                                    <Image Grid.Column="0" x:Name="ChildTypeIcon"
+                                           Margin="8, 0, 0, 0"
+                                           Source="{Binding Type.Icon}" />
+                                    <StackLayout Grid.Column="1" Orientation="Vertical">
+                                        <Label x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" FontSize="Large"
+                                               VerticalTextAlignment="Center" />
+                                        <Label x:Name="ChildRemarkLabel" Text="{Binding Remark}"
+                                               IsVisible="{Binding RemarkVisible}" VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                    <Label Grid.Column="3" x:Name="ChildAmountLabel"
+                                           Text="{Binding Amount, StringFormat='￥{0}'}"
+                                           TextColor="{Binding Color}" VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="End" Margin="0, 0, 8, 0" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>
