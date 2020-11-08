@@ -46,12 +46,13 @@
         <Button Grid.Column="4" Grid.Row="2" TextColor="Gray" x:Name="DayEvening" Text="晚上"
                 Clicked="DayEvening_Selected" BackgroundColor="Transparent" />
 
-        <ImageButton Grid.Column="0"
-                     Grid.Row="4"
-                     Grid.ColumnSpan="5"
-                     x:Name="Submit"
-                     Source="drawable/ic_float_check"
-                     BackgroundColor="Transparent"
-                     Clicked="Submit_OnClicked" />
+        <ImageButton
+            Grid.Column="0"
+            Grid.Row="4"
+            Grid.ColumnSpan="5"
+            x:Name="Submit"
+            Source="drawable/ic_float_check"
+            BackgroundColor="Transparent"
+            Clicked="Submit_OnClicked" />
     </Grid>
 </pages:PopupPage>

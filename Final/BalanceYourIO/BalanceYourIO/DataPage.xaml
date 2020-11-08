@@ -2,15 +2,42 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:balanceYourIo="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
              x:Class="BalanceYourIO.DataPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello, DataPage!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="RecordList">
+                <!-- <ListView.GroupHeaderTemplate> -->
+                <!--     <DataTemplate> -->
+                <!--         <Grid> -->
+                <!--             <Grid.ColumnDefinitions> -->
+                <!--                 <ColumnDefinition /> -->
+                <!--                 <ColumnDefinition /> -->
+                <!--                 <ColumnDefinition /> -->
+                <!--                 <ColumnDefinition /> -->
+                <!--             </Grid.ColumnDefinitions> -->
+                <!--             <Label x:Name="GroupDateLabel" Grid.Column="0" /> -->
+                <!--             <Label Grid.Column="1" /> -->
+                <!--             <Label x:Name="GroupOutcomeLabel" Grid.Column="2" TextColor="Orange" /> -->
+                <!--             <Label x:Name="GroupIncomeLabel" Grid.Column="3" TextColor="Green" /> -->
+                <!--         </Grid> -->
+                <!--     </DataTemplate> -->
+                <!-- </ListView.GroupHeaderTemplate> -->
 
-            <ImageButton Source="drawable/ic_float_add" 
-                         BackgroundColor="Transparent" Margin="16" 
+                <!-- <ListView.ItemTemplate> -->
+                <!--     <DataTemplate> -->
+                <!--         <StackLayout Orientation="Vertical"> -->
+                <!--             <Image x:Name="ChildTypeIcon" /> -->
+                <!--             <Label x:Name="ChildTypeNameLabel" /> -->
+                <!--             <Label x:Name="ChildRemarkLabel" /> -->
+                <!--             <Label x:Name="ChildAmountLabel" /> -->
+                <!--         </StackLayout> -->
+                <!--     </DataTemplate> -->
+                <!-- </ListView.ItemTemplate> -->
+            </ListView>
+
+            <ImageButton Source="drawable/ic_float_add"
+                         BackgroundColor="Transparent" Margin="16"
                          HorizontalOptions="End" VerticalOptions="End"
                          Clicked="NewBillRecord_OnClicked" />
         </StackLayout>

@@ -5,8 +5,8 @@
              xmlns:local="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
              x:Class="BalanceYourIO.AddBillPage">
 
-    <StackLayout Orientation="Vertical" Padding="16, 16, 16, 16">
-        <ScrollView>
+    <StackLayout>
+        <ScrollView Padding="16, 16, 16, 16">
             <StackLayout Orientation="Vertical">
                 <Label Text="支出"
                        FontSize="Large"
@@ -65,7 +65,7 @@
             </StackLayout>
         </ScrollView>
 
-        <Grid VerticalOptions="End">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -97,6 +97,10 @@
                        Margin="1, 1"
                        MaxLines="1" />
             </Grid>
+            <Entry x:Name="Amount" Grid.Row="1" Placeholder="请输入金额" Keyboard="Numeric"
+                   TextChanged="Amount_OnTextChanged" PlaceholderColor="Red" />
+            <Entry x:Name="Remark" Grid.Row="2" Placeholder="备注" Keyboard="Text" />
+            <Button x:Name="Submit" Grid.Row="3" Text="保存" VerticalOptions="StartAndExpand" Clicked="Submit_OnClicked" />
         </Grid>
     </StackLayout>
 </ContentPage>

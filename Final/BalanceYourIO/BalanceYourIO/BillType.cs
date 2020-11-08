@@ -10,5 +10,10 @@ namespace BalanceYourIO
         public string Name { get; set; }
         public DataProvider.IoType IoType { get; set; }
         public string Icon { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id}, {Name}, {IoType}, {Icon}";
+        }
     }
 }

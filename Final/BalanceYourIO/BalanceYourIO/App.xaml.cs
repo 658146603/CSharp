@@ -21,9 +21,9 @@ namespace BalanceYourIO
 
         static Database _database;
 
-        public static Database Database => _database ??= new Database(Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            DB_FILE));
+        public static Database Database => _database ??=
+            new Database(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                DB_FILE));
 
 
         protected override void OnStart()

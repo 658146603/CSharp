@@ -117,9 +117,17 @@ namespace BalanceYourIO
         {
             readonly SQLiteAsyncConnection _database;
 
-            public Database(string dbPath)
+            public Database(string db)
             {
-                _database = new SQLiteAsyncConnection(dbPath);
+                var Flags =
+                    // open the database in read/write mode
+                    SQLiteOpenFlags.ReadWrite |
+                    // create the database if it doesn't exist
+                    SQLiteOpenFlags.Create |
+                    // enable multi-threaded database access
+                    SQLiteOpenFlags.SharedCache;
+
+                _database = new SQLiteAsyncConnection(db, Flags);
                 _database.CreateTableAsync<BillRecord>().Wait();
             }
 

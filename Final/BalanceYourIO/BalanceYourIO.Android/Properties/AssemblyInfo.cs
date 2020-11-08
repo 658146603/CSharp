@@ -6,13 +6,13 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BalanceYourIO.Android")]
+[assembly: AssemblyTitle("BalanceYourIO")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CompanyName")]
-[assembly: AssemblyProduct("BalanceYourIO.Android")]
-[assembly: AssemblyCopyright("Copyright © CompanyName Year")]
-[assembly: AssemblyTrademark("CompanyTrademark")]
+[assembly: AssemblyCompany("ZJUT")]
+[assembly: AssemblyProduct("BalanceYourIO")]
+[assembly: AssemblyCopyright("Copyright © NFCV 2020")]
+[assembly: AssemblyTrademark("NFCV")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 
