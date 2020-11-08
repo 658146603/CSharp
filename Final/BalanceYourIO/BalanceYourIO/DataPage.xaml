@@ -7,9 +7,49 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="RecordList" IsGroupingEnabled="True">
-                <ListView.HeaderTemplate>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="72" />
+                                    <ColumnDefinition Width="72" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Large" />
+                                <Label Grid.Column="1" />
+                                <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange" FontSize="Large"
+                                       Text="{Binding Outcome}" />
+                                <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Large"
+                                       Text="{Binding Income}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
 
-                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" x:Name="ChildTypeIcon" Source="{Binding Type.Icon}" />
+                                    <Label Grid.Column="1" x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" />
+                                    <Label Grid.Column="2" x:Name="ChildRemarkLabel" Text="{Binding Remark}" />
+                                    <Label Grid.Column="4" x:Name="ChildAmountLabel" Text="{Binding Amount}"
+                                           TextColor="{Binding Color}" />
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
 
             <ImageButton Source="drawable/ic_float_add"

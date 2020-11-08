@@ -20,6 +20,8 @@ namespace BalanceYourIO
         public double Amount { get; set; }
         public string Remark { get; set; }
         public Color Color { get; set; }
+        
+        public string Icon { get; set; }
 
         public BillRecordDetail(BillRecord billRecord)
         {
@@ -29,6 +31,7 @@ namespace BalanceYourIO
             Time = billRecord.Time;
             Amount = billRecord.Amount;
             Remark = billRecord.Remark;
+            
             switch (Type.IoType)
             {
                 case IoType.Income:
@@ -46,19 +49,6 @@ namespace BalanceYourIO
         public override string ToString()
         {
             return $"{Id}, {DateConverter.ToFriendDateString(Date)}, {DateConverter.ToFriendDateTimeString(Time)}, {Type}, {Amount}, {Remark}";
-        }
-        
-        internal class BillRecordConverter: IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return BillRecordDayGroup.ConvertAll((List<BillRecord>) value);
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return null;
-            }
         }
     }
 }
