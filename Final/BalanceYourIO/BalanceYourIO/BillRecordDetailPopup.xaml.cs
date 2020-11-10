@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace BalanceYourIO
@@ -47,6 +42,25 @@ namespace BalanceYourIO
             await App.Database.DeleteBillRecordAsync(record);
             _listener.Invoke();
             await Navigation.PopPopupAsync();
+        }
+
+        private async void EditRecord_OnClicked(object sender, EventArgs e)
+        {
+            BillRecord record = new BillRecord
+            {
+                Id = Detail.Id,
+                BillType = Detail.Type.Id,
+                Amount = Detail.Amount,
+                Remark = Detail.Remark,
+                Time = Detail.Time
+            };
+
+            await Navigation.PushModalAsync(new AddBillPage(record));
+            _listener.Invoke();
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
+            {
+                await Navigation.PopPopupAsync();
+            }
         }
     }
 

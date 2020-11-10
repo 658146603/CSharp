@@ -11,7 +11,7 @@ namespace BalanceYourIO
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DataPage : ContentPage
     {
-        public ObservableCollection<BillRecordDayGroup> RecordDayGroup { get; set; } =
+        private ObservableCollection<BillRecordDayGroup> RecordDayGroup { get; set; } =
             new ObservableCollection<BillRecordDayGroup>();
 
         public DataPage()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -18,6 +19,8 @@ namespace BalanceYourIO
         private static readonly List<BillType> OtherBillType = BillTypes.FindAll(type => type.IoType == IoType.Other);
 
         private readonly List<StackLayout> _billTypeCell = new List<StackLayout>();
+
+        private bool _update = false;
 
         private BillRecord BillRecord { get; set; } = new BillRecord
             {Amount = 0.00f, Remark = "", Time = DateTime.Now, BillType = BillTypes[0].Id};
@@ -107,6 +110,15 @@ namespace BalanceYourIO
             BillType = BillTypes[0];
         }
 
+        public AddBillPage(BillRecord billRecord) : this()
+        {
+            _update = true;
+            BillRecord = billRecord;
+            BillType = BillTypes.Find(type => type.Id == BillRecord.BillType) ?? BillTypes[0];
+            Amount.Text = $"{BillRecord.Amount}";
+            Remark.Text = BillRecord.Remark;
+        }
+
         private void SetTime(DateTime dateTime)
         {
             BillRecord.Time = dateTime;
@@ -131,7 +143,7 @@ namespace BalanceYourIO
             }
         }
 
-        private void Submit_OnClicked(object sender, EventArgs e)
+        private async void Submit_OnClicked(object sender, EventArgs e)
         {
             if (Amount.Text == null || Amount.Text.EndsWith("."))
             {
@@ -145,9 +157,18 @@ namespace BalanceYourIO
                 BillRecord.BillType = BillType.Id;
                 BillRecord.Remark = Remark.Text;
 
-                App.Database.SaveBillRecordAsync(BillRecord);
-                Navigation.PopModalAsync(true);
-                Log.Warning(ClassId, $"SAVE: {BillRecord}");
+                if (_update)
+                {
+                    await App.Database.UpdateBillRecordAsync(BillRecord);
+                    Log.Warning(ClassId, $"UPDATE: {BillRecord}");
+                }
+                else
+                {
+                    await App.Database.SaveBillRecordAsync(BillRecord);
+                    Log.Warning(ClassId, $"SAVE: {BillRecord}");
+                }
+
+                await Navigation.PopModalAsync(true);
             }
             else
             {

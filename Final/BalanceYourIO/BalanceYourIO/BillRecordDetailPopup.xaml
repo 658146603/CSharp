@@ -7,7 +7,7 @@
                  x:Class="BalanceYourIO.BillRecordDetailPopup">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation
-            DurationIn="400" DurationOut="300"
+            DurationIn="400" DurationOut="100"
             EasingIn="SinOut" EasingOut="SinIn"
             HasBackgroundAnimation="True" PositionIn="Center"
             PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8" />
@@ -34,7 +34,7 @@
         <Label Grid.Row="0" Grid.Column="1" x:Name="TimeLabel" HorizontalOptions="CenterAndExpand"
                VerticalOptions="Center" />
         <ImageButton Grid.Row="0" Grid.Column="2" Source="drawable/ic_edit" HorizontalOptions="End"
-                     BackgroundColor="Transparent"
+                     BackgroundColor="Transparent" Clicked="EditRecord_OnClicked"
                      HeightRequest="28"
                      WidthRequest="28" />
         <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="TypeIcon" HorizontalOptions="Center"
