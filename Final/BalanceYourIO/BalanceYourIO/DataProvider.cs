@@ -136,6 +136,16 @@ namespace BalanceYourIO
                 return _database.Table<BillRecord>().ToListAsync();
             }
 
+            public Task<int> UpdateBillRecordAsync(BillRecord record)
+            {
+                return _database.UpdateAsync(record, typeof(BillRecord));
+            }
+            
+            public Task<int> DeleteBillRecordAsync(BillRecord record)
+            {
+                return _database.DeleteAsync(record);
+            }
+
             public Task<int> SaveBillRecordAsync(BillRecord billRecord)
             {
                 return _database.InsertAsync(billRecord);

@@ -82,6 +82,8 @@
     <AndroidResource Include="Resources\drawable\fork.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\ic_delete.xml" />
+    <AndroidResource Include="Resources\drawable\ic_edit.xml" />
     <AndroidResource Include="Resources\drawable\ic_float.xml" />
     <AndroidResource Include="Resources\drawable\ic_float_add.xml" />
     <AndroidResource Include="Resources\drawable\ic_float_check.xml" />

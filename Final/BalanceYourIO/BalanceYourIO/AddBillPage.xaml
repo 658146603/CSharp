@@ -98,7 +98,7 @@
                        MaxLines="1" />
             </Grid>
             <Entry x:Name="Amount" Grid.Row="1" Placeholder="请输入金额" Keyboard="Numeric"
-                   TextChanged="Amount_OnTextChanged" PlaceholderColor="Red" />
+                   TextChanged="Amount_OnTextChanged" PlaceholderColor="Red" MaxLength="10"/>
             <Entry x:Name="Remark" Grid.Row="2" Placeholder="备注" Keyboard="Text" />
             <Button x:Name="Submit" Grid.Row="3" Text="保存" VerticalOptions="StartAndExpand" Clicked="Submit_OnClicked" />
         </Grid>

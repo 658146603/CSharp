@@ -6,24 +6,27 @@
              x:Class="BalanceYourIO.DataPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="RecordList" IsGroupingEnabled="True">
+            <ListView x:Name="RecordList" IsGroupingEnabled="True" ItemSelected="RecordList_OnItemSelected" HasUnevenRows="True">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid>
+                        <ViewCell Height="28">
+                            <Grid BackgroundColor="#eeeeee">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="96" />
                                     <ColumnDefinition Width="96" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Large"
+                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Medium"
                                        VerticalTextAlignment="Center" Margin="8, 0, 0, 0" />
                                 <Label Grid.Column="1" />
                                 <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange" FontSize="Small"
+                                       MaxLines="1"
                                        VerticalTextAlignment="Center"
+                                       HorizontalOptions="End"
                                        Text="{Binding Outcome, StringFormat='支出 {0:F2}'}" />
                                 <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Small"
+                                       MaxLines="1"
                                        VerticalTextAlignment="Center"
                                        HorizontalOptions="End"
                                        Text="{Binding Income, StringFormat='收入 {0:F2}'}" Margin="0, 0, 8, 0" />
@@ -38,22 +41,23 @@
                             <ViewCell.View>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="48" />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Column="0" x:Name="ChildTypeIcon"
+                                           HeightRequest="48" WidthRequest="48"
                                            Margin="8, 0, 0, 0"
                                            Source="{Binding Type.Icon}" />
-                                    <StackLayout Grid.Column="1" Orientation="Vertical">
-                                        <Label x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" FontSize="Large"
+                                    <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                        <Label x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" FontSize="Medium"
                                                VerticalTextAlignment="Center" />
-                                        <Label x:Name="ChildRemarkLabel" Text="{Binding Remark}"
-                                               IsVisible="{Binding RemarkVisible}" VerticalTextAlignment="Center" />
+                                        <!-- <Label x:Name="ChildRemarkLabel" Text="{Binding Remark}" -->
+                                        <!--        IsVisible="{Binding RemarkVisible}" VerticalTextAlignment="Center" /> -->
                                     </StackLayout>
                                     <Label Grid.Column="3" x:Name="ChildAmountLabel"
-                                           Text="{Binding Amount, StringFormat='￥{0}'}"
+                                           Text="{Binding Amount, StringFormat='￥{0:F2}'}"
                                            TextColor="{Binding Color}" VerticalTextAlignment="Center"
                                            HorizontalTextAlignment="End" Margin="0, 0, 8, 0" />
                                 </Grid>
