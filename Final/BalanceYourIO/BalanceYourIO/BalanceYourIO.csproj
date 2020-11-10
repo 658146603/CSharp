@@ -1,7 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <AssemblyVersion>0.9</AssemblyVersion>
+        <FileVersion>0.9</FileVersion>
+        <NeutralLanguage>zh-CN</NeutralLanguage>
+        <RunPostBuildEvent></RunPostBuildEvent>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
