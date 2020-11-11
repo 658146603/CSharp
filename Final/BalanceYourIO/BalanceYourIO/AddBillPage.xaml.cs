@@ -117,6 +117,7 @@ namespace BalanceYourIO
             BillType = BillTypes.Find(type => type.Id == BillRecord.BillType) ?? BillTypes[0];
             Amount.Text = $"{BillRecord.Amount}";
             Remark.Text = BillRecord.Remark;
+            DateLabel.Text = DateConverter.ToFriendDateTimeString(BillRecord.Time);
         }
 
         private void SetTime(DateTime dateTime)

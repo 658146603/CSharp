@@ -12,6 +12,10 @@
     <content url="file://C:/Microsoft/Xamarin/NuGet/xamarin.android.support.v7.appcompat/28.0.0.3/proguard/monoandroid90/proguard.txt" />
     <content url="file://C:/Microsoft/Xamarin/NuGet/xamarin.android.support.v7.recyclerview/28.0.0.3/proguard/monoandroid90/proguard.txt" />
     <content url="file://C:/Microsoft/Xamarin/NuGet/xamarin.android.support.versionedparcelable/28.0.0.3/proguard/monoandroid90" />
+    <content url="file://$USER_HOME$/.nuget/packages/skiasharp/2.80.2/build/monoandroid1.0/arm" />
+    <content url="file://$USER_HOME$/.nuget/packages/skiasharp/2.80.2/build/monoandroid1.0/arm64" />
+    <content url="file://$USER_HOME$/.nuget/packages/skiasharp/2.80.2/build/monoandroid1.0/x64" />
+    <content url="file://$USER_HOME$/.nuget/packages/skiasharp/2.80.2/build/monoandroid1.0/x86" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.androidx.activity/1.0.0.1/aar/androidx.activity.activity.aar" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.androidx.annotation/1.1.0.1/jar" />
     <content url="file://$USER_HOME$/.nuget/packages/xamarin.androidx.appcompat.appcompatresources/1.1.0.1/aar/androidx.appcompat.appcompat-resources.aar" />

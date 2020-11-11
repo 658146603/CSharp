@@ -11,7 +11,7 @@ namespace BalanceYourIO
     {
         public string Date => DateConverter.ToFriendDateString(_date);
 
-        private DateTime _date;
+        public DateTime _date;
 
         public double Income { get; set; } = 0f;
 
@@ -46,7 +46,7 @@ namespace BalanceYourIO
                 collection.Add(group);
             });
 
-            return new ObservableCollection<BillRecordDayGroup>(collection.OrderByDescending(group => @group.Date));
+            return new ObservableCollection<BillRecordDayGroup>(collection.OrderByDescending(group => @group._date));
         }
     }
 }
