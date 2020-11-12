@@ -1,4 +1,6 @@
 ﻿using System;
+using SkiaSharp;
+using Xamarin.Forms;
 
 namespace BalanceYourIO
 {
@@ -8,6 +10,10 @@ namespace BalanceYourIO
         public string Name { get; set; }
         public DataProvider.IoType IoType { get; set; }
         public string Icon { get; set; }
+
+        public string EnName { get; set; }
+
+        public SKColor Color { get; set; }
 
         public override string ToString()
         {

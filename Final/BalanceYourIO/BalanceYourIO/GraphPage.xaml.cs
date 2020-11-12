@@ -119,7 +119,7 @@ namespace BalanceYourIO
             {
                 IsAnimated = false,
             };
-            
+
             MonthPieChart.Chart = new PieChart()
             {
                 IsAnimated = false,
@@ -240,10 +240,13 @@ namespace BalanceYourIO
 
             foreach (var group in typedDict)
             {
-                var chartEntry = new ChartEntry((float) group.Value)
+                var chartEntry = new ChartEntry((float) Math.Log(group.Value + 1))
                 {
                     ValueLabel = $"{group.Value:F2}",
-                    Label = group.Key.Name,
+                    Label = group.Key.EnName,
+                    Color = group.Key.Color,
+                    ValueLabelColor = group.Key.Color,
+                    TextColor = group.Key.Color
                 };
 
                 typeMonthList.Add(chartEntry);
@@ -269,10 +272,13 @@ namespace BalanceYourIO
 
             foreach (var group in typedDict)
             {
-                var chartEntry = new ChartEntry((float) group.Value)
+                var chartEntry = new ChartEntry((float) Math.Log(group.Value + 1))
                 {
                     ValueLabel = $"{group.Value:F2}",
-                    Label = group.Key.Name,
+                    Label = group.Key.EnName,
+                    Color = group.Key.Color,
+                    ValueLabelColor = group.Key.Color,
+                    TextColor = group.Key.Color
                 };
 
                 typeYearList.Add(chartEntry);
