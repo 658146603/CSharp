@@ -12,19 +12,60 @@
                     <RowDefinition Height="80" />
                     <RowDefinition Height="80" />
                     <RowDefinition Height="*" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="■支出" TextColor="Orange" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Label Grid.Row="0" Grid.Column="1" Text="■收入" TextColor="Green" VerticalOptions="Center" HorizontalOptions="Center" />
-                <charts:ChartView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" x:Name="OutcomeLineChart" Margin="0"
+                <Label Grid.Row="0" Grid.Column="0" Text="■支出" TextColor="Orange" VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="1" Text="■收入" TextColor="Green" VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+                <charts:ChartView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" x:Name="YearsOutcomeLineChart" Margin="0"
                                   HorizontalOptions="FillAndExpand" />
-                <charts:ChartView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" x:Name="IncomeLineChart" Margin="0"
+                <charts:ChartView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" x:Name="YearsIncomeLineChart" Margin="0"
                                   HorizontalOptions="FillAndExpand" />
                 <charts:ChartView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="BarChart" Chart="{Binding }" />
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Row="0" Grid.Column="0" Source="drawable/ic_left" BackgroundColor="Transparent"
+                                 Clicked="YearDec_OnClicked" />
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="YearLabel" HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    <ImageButton Grid.Row="0" Grid.Column="2" Source="drawable/ic_right" BackgroundColor="Transparent"
+                                 Clicked="YearInc_OnClicked" />
+                    <charts:ChartView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="YearPieChart"></charts:ChartView>
+                    
+                </Grid>
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Row="0" Grid.Column="0" Source="drawable/ic_left" BackgroundColor="Transparent"
+                                 Clicked="MonthDec_OnClicked" />
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="MonthLabel" HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    <ImageButton Grid.Row="0" Grid.Column="2" Source="drawable/ic_right" BackgroundColor="Transparent"
+                                 Clicked="MonthInc_OnClicked" />
+                    <charts:ChartView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="MonthPieChart"></charts:ChartView>
+                </Grid>
             </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

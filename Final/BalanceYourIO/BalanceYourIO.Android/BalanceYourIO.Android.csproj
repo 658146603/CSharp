@@ -95,8 +95,10 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_graph.xml" />
+    <AndroidResource Include="Resources\drawable\ic_left.png" />
     <AndroidResource Include="Resources\drawable\ic_plus.xml" />
     <AndroidResource Include="Resources\drawable\ic_calendar.xml" />
+    <AndroidResource Include="Resources\drawable\ic_right.png" />
     <AndroidResource Include="Resources\drawable\ic_user.xml" />
     <AndroidResource Include="Resources\drawable\plus.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -160,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets" />
     <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

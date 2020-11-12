@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microcharts;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using SkiaSharp;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,35 +11,81 @@ namespace BalanceYourIO
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraphPage : ContentPage
     {
-        private ChartEntry[] _allOutcomeViewLineChartEntry;
+        private ChartEntry[] _yearsOutcomeViewLineChartEntry;
+        private ChartEntry[] _yearsIncomeViewLineChartEntry;
 
-        private ChartEntry[] _allIncomeViewLineChartEntry;
+        private ChartEntry[] _yearTypeViewPieChartEntry;
+        private ChartEntry[] _monthTypeViewPieChartEntry;
 
 
-        private ChartEntry[] AllOutcomeViewLineChartEntry
+        private int _year = DateTime.Now.Year;
+        private int _month = DateTime.Now.Month;
+
+        private int Year
         {
-            get => _allOutcomeViewLineChartEntry;
+            get => _year;
             set
             {
-                _allOutcomeViewLineChartEntry = value;
-                OutcomeLineChart.Chart.Entries = _allOutcomeViewLineChartEntry;
+                _year = value;
+                YearLabel.Text = $"{_year}年";
+                Month = Month;
+                YearTypeViewPieChartEntry = TypeYearEntry(Year);
             }
         }
 
-        private ChartEntry[] AllIncomeViewLineChartEntry
+        private int Month
         {
-            get => _allIncomeViewLineChartEntry;
+            get => _month;
             set
             {
-                _allIncomeViewLineChartEntry = value;
-                IncomeLineChart.Chart.Entries = _allIncomeViewLineChartEntry;
+                _month = value;
+                MonthLabel.Text = $"{_month}月";
+                MonthTypeViewPieChartEntry = TypeMonthEntry(Year, Month);
             }
         }
 
+        private ChartEntry[] YearsOutcomeViewLineChartEntry
+        {
+            get => _yearsOutcomeViewLineChartEntry;
+            set
+            {
+                _yearsOutcomeViewLineChartEntry = value;
+                YearsOutcomeLineChart.Chart.Entries = _yearsOutcomeViewLineChartEntry;
+            }
+        }
 
-        private ChartEntry[] SubOutcomeViewBarChartEntry { get; set; }
+        private ChartEntry[] YearsIncomeViewLineChartEntry
+        {
+            get => _yearsIncomeViewLineChartEntry;
+            set
+            {
+                _yearsIncomeViewLineChartEntry = value;
+                YearsIncomeLineChart.Chart.Entries = _yearsIncomeViewLineChartEntry;
+            }
+        }
 
-        private ChartEntry[] SubIncomeViewBarChartEntry { get; set; }
+        private ChartEntry[] YearTypeViewPieChartEntry
+        {
+            get => _yearTypeViewPieChartEntry;
+            set
+            {
+                _yearTypeViewPieChartEntry = value;
+                YearPieChart.Chart.Entries = _yearTypeViewPieChartEntry;
+            }
+        }
+
+        private ChartEntry[] MonthTypeViewPieChartEntry
+        {
+            get => _monthTypeViewPieChartEntry;
+            set
+            {
+                _monthTypeViewPieChartEntry = value;
+                MonthPieChart.Chart.Entries = _monthTypeViewPieChartEntry;
+            }
+        }
+
+        // private ChartEntry[] SubOutcomeViewBarChartEntry { get; set; }
+        // private ChartEntry[] SubIncomeViewBarChartEntry { get; set; }
 
         private IEnumerable<BillRecordDetail> BillRecordDetails { get; set; } = new List<BillRecordDetail>();
 
@@ -51,7 +93,7 @@ namespace BalanceYourIO
         {
             InitializeComponent();
 
-            OutcomeLineChart.Chart = new LineChart()
+            YearsOutcomeLineChart.Chart = new LineChart()
             {
                 LineMode = LineMode.Spline,
                 LineSize = 2,
@@ -62,7 +104,7 @@ namespace BalanceYourIO
                 IsAnimated = false
             };
 
-            IncomeLineChart.Chart = new LineChart()
+            YearsIncomeLineChart.Chart = new LineChart()
             {
                 LineMode = LineMode.Spline,
                 LineSize = 2,
@@ -71,6 +113,16 @@ namespace BalanceYourIO
                 PointMode = PointMode.Circle,
                 PointSize = 6,
                 IsAnimated = false
+            };
+
+            YearPieChart.Chart = new PieChart()
+            {
+                IsAnimated = false,
+            };
+            
+            MonthPieChart.Chart = new PieChart()
+            {
+                IsAnimated = false,
             };
         }
 
@@ -80,15 +132,21 @@ namespace BalanceYourIO
             var data = App.Database.GetBillRecordsAsync().Result;
             BillRecordDetails = from billRecord in data select new BillRecordDetail(billRecord);
 
-            YearDataEntry();
+            var (incomeList, outcomeList) = IncomeOutcomeYearsEntry();
+
+            YearsIncomeViewLineChartEntry = incomeList;
+            YearsOutcomeViewLineChartEntry = outcomeList;
+
+            Year = DateTime.Now.Year;
+            Month = DateTime.Now.Month;
         }
 
-        // TODO 间断年份的处理
-        private void YearDataEntry()
+        //TODO 间断年份的处理(也可能不去处理了)
+        private (ChartEntry[] incomeList, ChartEntry[] outcomeList) IncomeOutcomeYearsEntry()
         {
-            IOrderedEnumerable<IGrouping<int, BillRecordDetail>> yearGroups =
+            var yearGroups =
                 from detail in BillRecordDetails
-                group detail by detail.Date.Year
+                group detail by detail.Time.Year
                 into yearRecord
                 orderby yearRecord.Key
                 select yearRecord;
@@ -121,8 +179,140 @@ namespace BalanceYourIO
                 });
             }
 
-            AllIncomeViewLineChartEntry = incomeList.ToArray();
-            AllOutcomeViewLineChartEntry = outcomeList.ToArray();
+            return (incomeList.ToArray(), outcomeList.ToArray());
+        }
+
+        private (List<ChartEntry> incomeList, List<ChartEntry> outcomeList) IncomeOutcomeMonthEntry(int selectedYear)
+        {
+            IOrderedEnumerable<IGrouping<int, BillRecordDetail>> monthGroups =
+                from detail in BillRecordDetails
+                where detail.Date.Year == selectedYear
+                group detail by detail.Date.Month
+                into monthRecord
+                orderby monthRecord.Key
+                select monthRecord;
+
+            var outcomeList = new List<ChartEntry>();
+            var incomeList = new List<ChartEntry>();
+
+            foreach (var monthGroup in monthGroups)
+            {
+                var month = monthGroup.Key;
+                var monthIncome = monthGroup.ToList().Sum(detail =>
+                    detail.Type.IoType == DataProvider.IoType.Income ? detail.Amount : 0);
+
+                var monthOutcome = monthGroup.ToList().Sum(detail =>
+                    detail.Type.IoType == DataProvider.IoType.Outcome ? detail.Amount : 0);
+
+                outcomeList.Add(new ChartEntry((float) Math.Log(monthOutcome + 1))
+                {
+                    Label = $"{month}",
+                    ValueLabel = $"{monthOutcome:F2}",
+                    TextColor = SKColors.Black,
+                    Color = SKColors.Orange
+                });
+                incomeList.Add(new ChartEntry((float) Math.Log(monthIncome + 1))
+                {
+                    Label = $"{month}",
+                    ValueLabel = $"{monthIncome:F2}",
+                    TextColor = SKColors.Black,
+                    Color = SKColors.Green
+                });
+            }
+
+            return (incomeList, outcomeList);
+        }
+
+        private ChartEntry[] TypeMonthEntry(int year, int month)
+        {
+            var dateGroups =
+                from detail in BillRecordDetails
+                where (detail.Time.Month == month && detail.Time.Year == year)
+                group detail by detail.Type
+                into monthTypeRecord
+                select monthTypeRecord;
+
+            var typedDict = dateGroups.ToDictionary(
+                details => details.Key,
+                details => details.Sum(detail => detail.Amount));
+
+            var typeMonthList = new List<ChartEntry>();
+
+            foreach (var group in typedDict)
+            {
+                var chartEntry = new ChartEntry((float) group.Value)
+                {
+                    ValueLabel = $"{group.Value:F2}",
+                    Label = group.Key.Name,
+                };
+
+                typeMonthList.Add(chartEntry);
+            }
+
+            return typeMonthList.ToArray();
+        }
+
+        private ChartEntry[] TypeYearEntry(int year)
+        {
+            var typeGroups =
+                from detail in BillRecordDetails
+                where detail.Time.Year == year
+                group detail by detail.Type
+                into typeRecord
+                orderby typeRecord.Key
+                select typeRecord;
+
+            var typedDict = typeGroups.ToDictionary(
+                details => details.Key,
+                details => details.Sum(detail => detail.Amount));
+            var typeYearList = new List<ChartEntry>();
+
+            foreach (var group in typedDict)
+            {
+                var chartEntry = new ChartEntry((float) group.Value)
+                {
+                    ValueLabel = $"{group.Value:F2}",
+                    Label = group.Key.Name,
+                };
+
+                typeYearList.Add(chartEntry);
+            }
+
+            return typeYearList.ToArray();
+        }
+
+        private void YearInc_OnClicked(object sender, EventArgs e)
+        {
+            Year++;
+        }
+
+        private void YearDec_OnClicked(object sender, EventArgs e)
+        {
+            Year--;
+        }
+
+        private void MonthDec_OnClicked(object sender, EventArgs e)
+        {
+            if (Month <= 1)
+            {
+                Month = 1;
+            }
+            else
+            {
+                Month--;
+            }
+        }
+
+        private void MonthInc_OnClicked(object sender, EventArgs e)
+        {
+            if (Month >= 12)
+            {
+                Month = 12;
+            }
+            else
+            {
+                Month++;
+            }
         }
     }
 }

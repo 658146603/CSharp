@@ -1,10 +1,8 @@
 ﻿using System;
-using SQLite;
-using SQLitePCL;
 
 namespace BalanceYourIO
 {
-    public class BillType
+    public class BillType : IComparable<BillType>
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -14,6 +12,11 @@ namespace BalanceYourIO
         public override string ToString()
         {
             return $"{Id}, {Name}, {IoType}, {Icon}";
+        }
+
+        public int CompareTo(BillType other)
+        {
+            return other.Id == Id ? 0 : 1;
         }
     }
 }

@@ -126,9 +126,10 @@ namespace BalanceYourIO
             DateLabel.Text = DateConverter.ToFriendDateTimeString(dateTime);
         }
 
+        // TODO 记账金额合理性逻辑有待改进
         private void Amount_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue.EndsWith("."))
+            if (e.NewTextValue.EndsWith(".") || e.NewTextValue.StartsWith("-"))
             {
                 Amount.TextColor = Color.Red;
             }
@@ -147,6 +148,12 @@ namespace BalanceYourIO
         private async void Submit_OnClicked(object sender, EventArgs e)
         {
             if (Amount.Text == null || Amount.Text.EndsWith("."))
+            {
+                Amount.PlaceholderColor = Color.Red;
+                return;
+            }
+
+            if (Amount.Text.StartsWith("-"))
             {
                 Amount.PlaceholderColor = Color.Red;
                 return;
