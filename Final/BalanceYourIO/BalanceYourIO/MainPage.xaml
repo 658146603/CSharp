@@ -8,7 +8,5 @@
     <local:DataPage Title="数据" IconImageSource="drawable/ic_data" />
 
     <local:GraphPage Title="图表" IconImageSource="drawable/ic_graph" />
-
-    <local:UserPage Title="我的" IconImageSource="drawable/ic_user" />
-
+    <!-- <local:UserPage Title="我的" IconImageSource="drawable/ic_user" /> -->
 </TabbedPage>

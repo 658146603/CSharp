@@ -61,49 +61,100 @@ namespace BalanceYourIO
 
             for (int i = 0; i < OutcomeBillType.Count; i++)
             {
-                var cell = new StackLayout {Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4};
+                var cell = new StackLayout
+                {
+                    Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1
+                };
 
-                var button = new ImageButton {Source = OutcomeBillType[i].Icon};
+                var button = new ImageButton
+                {
+                    Source = OutcomeBillType[i].Icon, 
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1,
+                    BackgroundColor = Color.Transparent
+                };
                 var index = i;
                 button.Clicked += delegate { BillType = OutcomeBillType[index]; };
-                button.BackgroundColor = _unselected;
-
+                cell.BackgroundColor = _unselected;
+                
                 cell.Children.Add(button);
                 cell.Children.Add(new Label {Text = OutcomeBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
                 BillTypesOutcomeGrid.Children.Add(cell, i % 5, i / 5);
+
+                var cellSize = cell.Measure(-1, -1);
+
+                BillTypesOutcomeGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+
                 _billTypeCell.Add(cell);
             }
 
             for (int i = 0; i < IncomeBillType.Count; i++)
             {
-                var cell = new StackLayout {Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4};
+                var cell = new StackLayout
+                {
+                    Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1
+                };
 
-                var button = new ImageButton {Source = IncomeBillType[i].Icon};
+                var button = new ImageButton
+                {
+                    Source = IncomeBillType[i].Icon,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1,
+                    BackgroundColor = Color.Transparent
+                };
                 var index = i;
                 button.Clicked += delegate { BillType = IncomeBillType[index]; };
-                button.BackgroundColor = _unselected;
+                cell.BackgroundColor = _unselected;
 
                 cell.Children.Add(button);
                 cell.Children.Add(new Label {Text = IncomeBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
                 BillTypesIncomeGrid.Children.Add(cell, i % 5, i / 5);
+                
+                var cellSize = cell.Measure(-1, -1);
+
+                BillTypesIncomeGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+
                 _billTypeCell.Add(cell);
             }
 
             for (int i = 0; i < OtherBillType.Count; i++)
             {
-                var cell = new StackLayout {Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4};
+                var cell = new StackLayout
+                {
+                    Orientation = StackOrientation.Vertical, Margin = 12, Padding = 4,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1
+                };
 
-                var button = new ImageButton {Source = OtherBillType[i].Icon};
+                var button = new ImageButton
+                {
+                    Source = OtherBillType[i].Icon,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.Start,
+                    HeightRequest = -1,
+                    BackgroundColor = Color.Transparent
+                };
                 var index = i;
                 button.Clicked += delegate { BillType = OtherBillType[index]; };
-                button.BackgroundColor = _unselected;
+                cell.BackgroundColor = _unselected;
 
                 cell.Children.Add(button);
                 cell.Children.Add(new Label {Text = OtherBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
                 BillTypesOtherGrid.Children.Add(cell, i % 5, i / 5);
+                
+                var cellSize = cell.Measure(-1, -1);
+
+                BillTypesOtherGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+
                 _billTypeCell.Add(cell);
             }
 

@@ -5,72 +5,89 @@
              xmlns:balanceYourIo="clr-namespace:BalanceYourIO;assembly=BalanceYourIO"
              x:Class="BalanceYourIO.DataPage">
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="RecordList" IsGroupingEnabled="True" ItemSelected="RecordList_OnItemSelected" HasUnevenRows="True">
-                <ListView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="28">
-                            <Grid BackgroundColor="#eeeeee">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="96" />
-                                    <ColumnDefinition Width="96" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}" FontSize="Medium"
-                                       VerticalTextAlignment="Center" Margin="8, 0, 0, 0" />
-                                <Label Grid.Column="1" />
-                                <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange" FontSize="Small"
-                                       MaxLines="1"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalOptions="End"
-                                       Text="{Binding Outcome, StringFormat='支出 {0:F2}'}" />
-                                <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Small"
-                                       MaxLines="1"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalOptions="End"
-                                       Text="{Binding Income, StringFormat='收入 {0:F2}'}" Margin="0, 0, 8, 0" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.GroupHeaderTemplate>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="96" />
+            </Grid.RowDefinitions>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="96" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <ListView x:Name="RecordList" IsGroupingEnabled="True" ItemSelected="RecordList_OnItemSelected"
+                          HasUnevenRows="True">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="28">
+                                <Grid BackgroundColor="#eeeeee">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="96" />
+                                        <ColumnDefinition Width="96" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" x:Name="ChildTypeIcon"
-                                           HeightRequest="48" WidthRequest="48"
-                                           Margin="8, 0, 0, 0"
-                                           Source="{Binding Type.Icon}" />
-                                    <StackLayout Grid.Column="1" Orientation="Horizontal">
-                                        <Label x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}" FontSize="Medium"
-                                               VerticalTextAlignment="Center" />
-                                        <!-- <Label x:Name="ChildRemarkLabel" Text="{Binding Remark}" -->
-                                        <!--        IsVisible="{Binding RemarkVisible}" VerticalTextAlignment="Center" /> -->
-                                    </StackLayout>
-                                    <Label Grid.Column="3" x:Name="ChildAmountLabel"
-                                           Text="{Binding Amount, StringFormat='￥{0:F2}'}"
-                                           TextColor="{Binding Color}" VerticalTextAlignment="Center"
-                                           HorizontalTextAlignment="End" Margin="0, 0, 8, 0" />
+                                    <Label Grid.Column="0" x:Name="GroupDateLabel" Text="{Binding Date}"
+                                           FontSize="Medium"
+                                           VerticalTextAlignment="Center" Margin="8, 0, 0, 0" />
+                                    <Label Grid.Column="1" />
+                                    <Label Grid.Column="2" x:Name="GroupOutcomeLabel" TextColor="Orange"
+                                           FontSize="Small"
+                                           MaxLines="1"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalOptions="End"
+                                           Text="{Binding Outcome, StringFormat='支出 {0:F2}'}" />
+                                    <Label Grid.Column="3" x:Name="GroupIncomeLabel" TextColor="Green" FontSize="Small"
+                                           MaxLines="1"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalOptions="End"
+                                           Text="{Binding Income, StringFormat='收入 {0:F2}'}" Margin="0, 0, 8, 0" />
                                 </Grid>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
 
-            <ImageButton Source="drawable/ic_float_add"
-                         BackgroundColor="Transparent" Margin="16"
-                         HorizontalOptions="End" VerticalOptions="End"
-                         Clicked="NewBillRecord_OnClicked" />
-        </StackLayout>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" x:Name="ChildTypeIcon"
+                                               HeightRequest="48" WidthRequest="48"
+                                               Margin="8, 0, 0, 0"
+                                               Source="{Binding Type.Icon}" />
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                            <Label x:Name="ChildTypeNameLabel" Text="{Binding Type.Name}"
+                                                   FontSize="Medium"
+                                                   VerticalTextAlignment="Center" />
+                                            <!-- <Label x:Name="ChildRemarkLabel" Text="{Binding Remark}" -->
+                                            <!--        IsVisible="{Binding RemarkVisible}" VerticalTextAlignment="Center" /> -->
+                                        </StackLayout>
+                                        <Label Grid.Column="3" x:Name="ChildAmountLabel"
+                                               Text="{Binding Amount, StringFormat='￥{0:F2}'}"
+                                               TextColor="{Binding Color}" VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="End" Margin="0, 0, 8, 0" />
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <ImageButton
+                Grid.Row="1" Grid.Column="1" Source="drawable/ic_float_add"
+                BackgroundColor="Transparent" Margin="16"
+                HorizontalOptions="End" VerticalOptions="End"
+                Clicked="NewBillRecord_OnClicked" />
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

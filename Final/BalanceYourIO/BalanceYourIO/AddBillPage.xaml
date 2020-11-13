@@ -7,12 +7,12 @@
 
     <StackLayout>
         <ScrollView Padding="16, 16, 16, 16">
-            <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" x:Name="TypeChooseLayout" HeightRequest="-1">
                 <Label Text="支出"
                        FontSize="Large"
                        HorizontalOptions="Center"
-                       Margin="0, 16, 0, 0" />
-                <Grid x:Name="BillTypesOutcomeGrid">
+                       Margin="0, 16, 0, 8" />
+                <Grid x:Name="BillTypesOutcomeGrid" HeightRequest="-1" VerticalOptions="Start">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -22,15 +22,15 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="72" />
-                        <RowDefinition Height="72" />
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                 </Grid>
 
                 <Label Text="收入"
                        FontSize="Large"
                        HorizontalOptions="Center"
-                       Margin="0, 16, 0, 0" />
+                       Margin="0, 16, 0, 8" />
                 <Grid x:Name="BillTypesIncomeGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -41,14 +41,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="72" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                 </Grid>
 
                 <Label Text="其他"
                        FontSize="Large"
                        HorizontalOptions="Center"
-                       Margin="0, 16, 0, 0" />
+                       Margin="0, 16, 0, 8" />
                 <Grid x:Name="BillTypesOtherGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -59,7 +59,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="72" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                 </Grid>
             </StackLayout>
@@ -98,7 +98,7 @@
                        MaxLines="1" />
             </Grid>
             <Entry x:Name="Amount" Grid.Row="1" Placeholder="请输入金额" Keyboard="Numeric"
-                   TextChanged="Amount_OnTextChanged" PlaceholderColor="Red" MaxLength="10"/>
+                   TextChanged="Amount_OnTextChanged" PlaceholderColor="Red" MaxLength="10" />
             <Entry x:Name="Remark" Grid.Row="2" Placeholder="备注" Keyboard="Text" />
             <Button x:Name="Submit" Grid.Row="3" Text="保存" VerticalOptions="StartAndExpand" Clicked="Submit_OnClicked" />
         </Grid>
