@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -31,10 +32,26 @@ namespace BalanceYourIO
 
             var data = App.Database.GetBillRecordsAsync().Result;
             RecordDayGroup.Clear();
-            foreach (var billRecordDayGroup in BillRecordDayGroup.ConvertAll(data))
-            {
-                RecordDayGroup.Add(billRecordDayGroup);
-            }
+
+            var dateGroup =
+                from billRecord in data
+                group billRecord by billRecord.Time.Date
+                into g
+                orderby g.Key descending
+                select g;
+
+            RecordDayGroup =
+                new ObservableCollection<BillRecordDayGroup>(
+                    from item in dateGroup
+                    select new BillRecordDayGroup(item.OrderByDescending(detail => detail.Time.Hour)
+                        .ThenByDescending(detail => detail.Id).ToList()) {_date = item.Key}
+                );
+
+
+            // foreach (var billRecordDayGroup in groups)
+            // {
+            //     RecordDayGroup.Add(billRecordDayGroup);
+            // }
 
             RecordList.ItemsSource = RecordDayGroup;
         }

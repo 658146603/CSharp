@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -70,7 +69,7 @@ namespace BalanceYourIO
 
                 var button = new ImageButton
                 {
-                    Source = OutcomeBillType[i].Icon, 
+                    Source = OutcomeBillType[i].Icon,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     VerticalOptions = LayoutOptions.Start,
                     HeightRequest = -1,
@@ -79,7 +78,7 @@ namespace BalanceYourIO
                 var index = i;
                 button.Clicked += delegate { BillType = OutcomeBillType[index]; };
                 cell.BackgroundColor = _unselected;
-                
+
                 cell.Children.Add(button);
                 cell.Children.Add(new Label {Text = OutcomeBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
@@ -87,7 +86,8 @@ namespace BalanceYourIO
 
                 var cellSize = cell.Measure(-1, -1);
 
-                BillTypesOutcomeGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+                BillTypesOutcomeGrid.RowDefinitions.ForEach(definition =>
+                    definition.Height = new GridLength(cellSize.Request.Height * 8));
 
                 _billTypeCell.Add(cell);
             }
@@ -117,10 +117,11 @@ namespace BalanceYourIO
                 cell.Children.Add(new Label {Text = IncomeBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
                 BillTypesIncomeGrid.Children.Add(cell, i % 5, i / 5);
-                
+
                 var cellSize = cell.Measure(-1, -1);
 
-                BillTypesIncomeGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+                BillTypesIncomeGrid.RowDefinitions.ForEach(definition =>
+                    definition.Height = new GridLength(cellSize.Request.Height * 8));
 
                 _billTypeCell.Add(cell);
             }
@@ -150,10 +151,11 @@ namespace BalanceYourIO
                 cell.Children.Add(new Label {Text = OtherBillType[i].Name, HorizontalOptions = LayoutOptions.Center});
 
                 BillTypesOtherGrid.Children.Add(cell, i % 5, i / 5);
-                
+
                 var cellSize = cell.Measure(-1, -1);
 
-                BillTypesOtherGrid.RowDefinitions.ForEach(definition => definition.Height = new GridLength(cellSize.Request.Height*8));
+                BillTypesOtherGrid.RowDefinitions.ForEach(definition =>
+                    definition.Height = new GridLength(cellSize.Request.Height * 8));
 
                 _billTypeCell.Add(cell);
             }
@@ -180,58 +182,99 @@ namespace BalanceYourIO
         // TODO 记账金额合理性逻辑有待改进
         private void Amount_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue.EndsWith(".") || e.NewTextValue.StartsWith("-"))
+            // if (e.NewTextValue.EndsWith(".") || e.NewTextValue.StartsWith("-"))
+            // {
+            //     Amount.TextColor = Color.Red;
+            // }
+            // else if (double.TryParse(e.NewTextValue, out var amount))
+            // {
+            //     Amount.TextColor = Color.Black;
+            //
+            //     Amount.Text = amount.ToString("#.##");
+            // }
+            // else
+            // {
+            //     Amount.TextColor = Color.Red;
+            // }
+
+            var amount = IsAmountValid(Amount.Text);
+
+            if (amount <= 0)
             {
                 Amount.TextColor = Color.Red;
-            }
-            else if (double.TryParse(e.NewTextValue, out var amount))
-            {
-                Amount.TextColor = Color.Black;
-
-                Amount.Text = amount.ToString("#.##");
             }
             else
             {
-                Amount.TextColor = Color.Red;
+                Amount.TextColor = Color.Black;
             }
         }
 
         private async void Submit_OnClicked(object sender, EventArgs e)
         {
-            if (Amount.Text == null || Amount.Text.EndsWith("."))
+            // if (Amount.Text == null || Amount.Text.EndsWith("."))
+            // {
+            //     Amount.PlaceholderColor = Color.Red;
+            //     return;
+            // }
+            //
+            // if (Amount.Text.StartsWith("-"))
+            // {
+            //     Amount.PlaceholderColor = Color.Red;
+            //     return;
+            // }
+
+            // if (double.TryParse(Amount.Text, out var amount))
+            // {
+            //     BillRecord.Amount = amount;
+            //     BillRecord.BillType = BillType.Id;
+            //     BillRecord.Remark = Remark.Text;
+            
+            var amount = IsAmountValid(Amount.Text);
+            if (amount <= 0)
             {
-                Amount.PlaceholderColor = Color.Red;
+                Amount.TextColor = Color.Red;
                 return;
             }
 
-            if (Amount.Text.StartsWith("-"))
+            BillRecord.Amount = (double) amount;
+            BillRecord.BillType = BillType.Id;
+            BillRecord.Remark = Remark.Text;
+
+            if (_update)
             {
-                Amount.PlaceholderColor = Color.Red;
-                return;
-            }
-
-            if (double.TryParse(Amount.Text, out var amount))
-            {
-                BillRecord.Amount = amount;
-                BillRecord.BillType = BillType.Id;
-                BillRecord.Remark = Remark.Text;
-
-                if (_update)
-                {
-                    await App.Database.UpdateBillRecordAsync(BillRecord);
-                    Log.Warning(ClassId, $"UPDATE: {BillRecord}");
-                }
-                else
-                {
-                    await App.Database.SaveBillRecordAsync(BillRecord);
-                    Log.Warning(ClassId, $"SAVE: {BillRecord}");
-                }
-
-                await Navigation.PopModalAsync(true);
+                await App.Database.UpdateBillRecordAsync(BillRecord);
+                Log.Warning(ClassId, $"UPDATE: {BillRecord}");
             }
             else
             {
-                Amount.PlaceholderColor = Color.Red;
+                await App.Database.SaveBillRecordAsync(BillRecord);
+                Log.Warning(ClassId, $"SAVE: {BillRecord}");
+            }
+
+            if (Navigation.ModalStack.Count > 0)
+            {
+                await Navigation.PopModalAsync(true);
+            }
+
+            // }
+            // else
+            // {
+            //     Amount.PlaceholderColor = Color.Red;
+            // }
+        }
+
+
+        private decimal IsAmountValid(string text)
+        {
+            if (decimal.TryParse(Amount.Text, out var amount))
+            {
+                Log.Warning(ClassId, $"Before {text}, After {Math.Round(amount, 2)}");
+                
+                return amount >= 0 ? Math.Round(amount, 2): -1;
+            }
+            else
+            {
+                return -1;
             }
         }
     }

@@ -34,19 +34,35 @@ namespace BalanceYourIO
             }
         }
 
-        public static ObservableCollection<BillRecordDayGroup> ConvertAll(List<BillRecord> billRecords)
+        public static IEnumerable<BillRecordDayGroup> ConvertAll(List<BillRecord> billRecords)
         {
-            List<BillRecordDayGroup> collection = new List<BillRecordDayGroup>();
-            billRecords.GroupToDictionary(record => record.Time.Date).ForEach(pair =>
-            {
-                var list = from record in pair.Value
-                    orderby record.Time.Hour descending, record.Id descending
-                    select record;
-                var group = new BillRecordDayGroup(list.ToList()) {_date = pair.Key};
-                collection.Add(group);
-            });
+            var dateGroup =
+                from billRecord in billRecords
+                group billRecord by billRecord.Time.Date
+                into g
+                orderby g.Key descending
+                select g;
+            
+            var groups =
+                from item in dateGroup
+                select new BillRecordDayGroup(item.OrderByDescending(detail => detail.Time.Hour)
+                    .ThenByDescending(detail => detail.Id).ToList()) {_date = item.Key};
 
-            return new ObservableCollection<BillRecordDayGroup>(collection.OrderByDescending(group => @group._date));
+            return groups;
+            
+            
+            // List<BillRecordDayGroup> collection = new List<BillRecordDayGroup>();
+            //
+            // billRecords.GroupToDictionary(record => record.Time.Date).ForEach(pair =>
+            // {
+            //     var list = from record in pair.Value
+            //         orderby record.Time.Hour descending, record.Id descending
+            //         select record;
+            //     var group = new BillRecordDayGroup(list.ToList()) {_date = pair.Key};
+            //     collection.Add(group);
+            // });
+            //
+            // return new ObservableCollection<BillRecordDayGroup>(collection.OrderByDescending(group => @group._date));
         }
     }
 }
