@@ -19,6 +19,7 @@ namespace BalanceYourIO
 
         public BillRecordDayGroup(List<BillRecord> billRecords)
         {
+            //统计每天的收支状况
             foreach (var record in billRecords)
             {
                 var detail = new BillRecordDetail(record);

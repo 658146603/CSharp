@@ -31,6 +31,7 @@ namespace BalanceYourIO
         };
 
 
+        //人性化的日期时间格式化文本方法[YYYY]MM月dd日[(今天)] 下午
         public static string ToFriendDateTimeString(DateTime dateTime)
         {
             var today = DateTime.Now;
@@ -53,6 +54,7 @@ namespace BalanceYourIO
             return final;
         }
 
+        //人性化的日期时间格式化文本方法[YYYY]MM月dd日[(今天)] 星期W
         public static string ToFriendDateString(DateTime dateTime)
         {
             var today = DateTime.Now;
@@ -74,6 +76,7 @@ namespace BalanceYourIO
             return final;
         }
 
+        //将小时数转换成时间段
         private static string ToDayDetail(int hour)
         {
             if (Dawn.Contains(hour))

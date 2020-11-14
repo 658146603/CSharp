@@ -14,7 +14,7 @@ namespace BalanceYourIO
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage();//打开应用时显示MainPage作为主页
         }
 
         private static string DB_FILE = "byio.db3";
@@ -23,7 +23,7 @@ namespace BalanceYourIO
 
         public static Database Database => _database ??=
             new Database(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                DB_FILE));
+                DB_FILE)); //返回单例的Database对象
 
 
         protected override void OnStart()

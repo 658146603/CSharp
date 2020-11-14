@@ -7,6 +7,7 @@ namespace BalanceYourIO
 {
     public static class DataProvider
     {
+        //收支类型
         public enum IoType
         {
             Unset = -1,
@@ -23,6 +24,7 @@ namespace BalanceYourIO
             Year = 3
         }
 
+        //时间段设置
         public enum DayDetail
         {
             Dawn = 3,
@@ -32,6 +34,7 @@ namespace BalanceYourIO
             Evening = 21
         }
 
+        //预设记账类型
         public static readonly List<BillType> BillTypes = new List<BillType>
         {
             new BillType
@@ -111,6 +114,7 @@ namespace BalanceYourIO
             }
         };
 
+        //数据库对象，提供增删改查功能
         public class Database
         {
             readonly SQLiteAsyncConnection _database;

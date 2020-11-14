@@ -11,22 +11,26 @@ namespace BalanceYourIO
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddBillPage : ContentPage
     {
+        //构造收入，支出，其他类型列表
         private static readonly List<BillType> OutcomeBillType =
             BillTypes.FindAll(type => type.IoType == IoType.Outcome);
-
         private static readonly List<BillType> IncomeBillType = BillTypes.FindAll(type => type.IoType == IoType.Income);
         private static readonly List<BillType> OtherBillType = BillTypes.FindAll(type => type.IoType == IoType.Other);
 
         private readonly List<StackLayout> _billTypeCell = new List<StackLayout>();
 
+        //判断是更新还是新建记录
         private bool _update = false;
 
+        //存储当前记账数据的BillRecord对象
         private BillRecord BillRecord { get; set; } = new BillRecord
             {Amount = 0.00f, Remark = "", Time = DateTime.Now, BillType = BillTypes[0].Id};
 
+        //类型选中和未选中的颜色
         private readonly Color _selected = new Color(77 / 255f, 182 / 255f, 172 / 255f, 75 / 100f);
         private readonly Color _unselected = Color.Transparent;
 
+        //默认选中的项为第一项
         private BillType _billType = OutcomeBillType[0];
 
         private BillType BillType
@@ -36,7 +40,7 @@ namespace BalanceYourIO
             {
                 _billType = value;
 
-
+                //设置类型的同时将选中的类型设置颜色标记
                 var index = BillTypes.FindIndex(type => type.Id == _billType.Id);
                 foreach (var t in _billTypeCell)
                 {
@@ -52,6 +56,8 @@ namespace BalanceYourIO
         {
             InitializeComponent();
             DateLabel.Text = DateConverter.ToFriendDateTimeString(BillRecord.Time);
+            
+            //点击日历按钮跳转日期选择
             ChooseDate.Clicked += async (sender, args) =>
             {
                 var page = new ChooseDatePopup(SetTime);
@@ -162,7 +168,7 @@ namespace BalanceYourIO
 
             BillType = BillTypes[0];
         }
-
+        
         public AddBillPage(BillRecord billRecord) : this()
         {
             _update = true;
@@ -173,13 +179,14 @@ namespace BalanceYourIO
             DateLabel.Text = DateConverter.ToFriendDateTimeString(BillRecord.Time);
         }
 
+        //日期选择的回调
         private void SetTime(DateTime dateTime)
         {
             BillRecord.Time = dateTime;
             DateLabel.Text = DateConverter.ToFriendDateTimeString(dateTime);
         }
 
-        // TODO 记账金额合理性逻辑有待改进
+        // DONE 改进记账金额合理性逻辑
         private void Amount_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             // if (e.NewTextValue.EndsWith(".") || e.NewTextValue.StartsWith("-"))
@@ -264,6 +271,7 @@ namespace BalanceYourIO
         }
 
 
+        //判断金额合理性
         private decimal IsAmountValid(string text)
         {
             if (decimal.TryParse(Amount.Text, out var amount))

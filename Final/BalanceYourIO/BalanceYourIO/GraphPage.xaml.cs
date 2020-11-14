@@ -11,9 +11,11 @@ namespace BalanceYourIO
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraphPage : ContentPage
     {
+        //历年收支状况折线图数据源
         private ChartEntry[] _yearsOutcomeViewLineChartEntry;
         private ChartEntry[] _yearsIncomeViewLineChartEntry;
 
+        //年内，月内收支状况数据源
         private ChartEntry[] _yearTypeViewPieChartEntry;
         private ChartEntry[] _monthTypeViewPieChartEntry;
 
@@ -21,6 +23,7 @@ namespace BalanceYourIO
         private int _year = DateTime.Now.Year;
         private int _month = DateTime.Now.Month;
 
+        //当前选中的年份
         private int Year
         {
             get => _year;
@@ -33,6 +36,7 @@ namespace BalanceYourIO
             }
         }
 
+        //当前选中的月份
         private int Month
         {
             get => _month;
@@ -93,6 +97,7 @@ namespace BalanceYourIO
         {
             InitializeComponent();
 
+            //初始化和配置图表
             YearsOutcomeLineChart.Chart = new LineChart()
             {
                 LineMode = LineMode.Spline,
@@ -141,7 +146,7 @@ namespace BalanceYourIO
             Month = DateTime.Now.Month;
         }
 
-        //TODO 间断年份的处理(也可能不去处理了)
+        //获取数据源
         private (ChartEntry[] incomeList, ChartEntry[] outcomeList) IncomeOutcomeYearsEntry()
         {
             var yearGroups =

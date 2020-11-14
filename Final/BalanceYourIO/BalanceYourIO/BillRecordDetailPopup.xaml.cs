@@ -46,6 +46,7 @@ namespace BalanceYourIO
 
         private async void EditRecord_OnClicked(object sender, EventArgs e)
         {
+            //通过BillRecordDetail构造BillRecord
             BillRecord record = new BillRecord
             {
                 Id = Detail.Id,
